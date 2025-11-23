@@ -35,6 +35,7 @@ pipeline {
             }
         }
         stage('Build docker image'){
+            agent any
             steps {
                 sh 'docker build -t backend-test .'
             }
