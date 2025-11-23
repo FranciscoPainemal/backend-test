@@ -34,9 +34,8 @@ pipeline {
                 sh 'npm run build'
             }
         }
-        stage('build docker image'){
+        stage('Build docker image'){
             steps {
-                sh 'echo "Haciendo build al codigo"'
                 sh 'docker build -t backend-test .'
             }
         }
