@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Build docker image'){
             steps {
-                sh 'docker build -t backend-node .'
+                sh 'docker build -t backend-test .'
             }
         }
         stage('FIn PIpeline'){
