@@ -9,6 +9,11 @@ pipeline {
                 sh 'echo "Iniciando pipeline"'
             }
         }
+        stage('MItad PIpeline'){
+            steps {
+                echo 'mitad de pipielin'
+            }
+        }
         stage('FIn PIpeline'){
             steps {
                 echo 'Adios desde jenkins terminal'
