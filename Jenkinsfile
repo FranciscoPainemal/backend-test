@@ -3,14 +3,14 @@ pipeline {
     options {  
         timeout(time:1 , unit:'MINUTES')
     }
-    stages('inicio pipeline'){
-        steps {
+    stages{
+        stage {
             sh 'echo "Iniciando pipeline"'
         }
-        steps {
+        stage {
             sh 'echo "saludos desde jenkins la mitad del pipelina terminal"'
         }
-        steps {
+        stage {
             echo 'Adios desde jenkins terminal'
         }
     }
