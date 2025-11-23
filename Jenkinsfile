@@ -4,24 +4,34 @@ pipeline {
             image "node:22"
         }
     }
-    options {  
-        timeout(time:1 , unit:'MINUTES')
-    }
     stages{
         stage('inicio pipeline'){
             steps {
                 sh 'echo "Iniciando pipeline"'
             }
         }
-        stage('MItad PIpeline'){
-            steps {
-                echo 'mitad de pipielin'
-            }
-        }
         stage('Dependencias'){
             steps {
                 sh 'echo "mitad de pipielin"'
                 sh 'npm install'
+            }
+        }
+        stage('Lint codigo'){
+            steps {
+                sh 'echo "Haciendo linter al codigo"'
+                sh 'npm rn lint'
+            }
+        }
+        stage('coverage test'){
+            steps {
+                sh 'echo "Haciendo linter al codigo"'
+                sh 'npm rn test:cov'
+            }
+        }
+        stage('build'){
+            steps {
+                sh 'echo "Haciendo build al codigo"'
+                sh 'npm rn build'
             }
         }
         stage('FIn PIpeline'){
