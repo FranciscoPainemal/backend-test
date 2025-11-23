@@ -19,19 +19,19 @@ pipeline {
         stage('Lint codigo'){
             steps {
                 sh 'echo "Haciendo linter al codigo"'
-                sh 'npm rn lint'
+                sh 'npm run lint'
             }
         }
         stage('coverage test'){
             steps {
                 sh 'echo "Haciendo linter al codigo"'
-                sh 'npm rn test:cov'
+                sh 'npm run test:cov'
             }
         }
         stage('build'){
             steps {
                 sh 'echo "Haciendo build al codigo"'
-                sh 'npm rn build'
+                sh 'npm run build'
             }
         }
         stage('FIn PIpeline'){
