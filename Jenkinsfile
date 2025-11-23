@@ -37,7 +37,7 @@ pipeline {
         stage('build docker image'){
             steps {
                 sh 'echo "Haciendo build al codigo"'
-                sh 'docker build -t backend-test'
+                sh 'docker build -t backend-test .'
             }
         }
         stage('FIn PIpeline'){
