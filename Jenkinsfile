@@ -4,14 +4,20 @@ pipeline {
         timeout(time:1 , unit:'MINUTES')
     }
     stages{
-        stage {
-            sh 'echo "Iniciando pipeline"'
+        stage('inicio pipeline'){
+            steps {
+                sh 'echo "Iniciando pipeline"'
+            }
         }
         stage {
-            sh 'echo "saludos desde jenkins la mitad del pipelina terminal"'
+            steps {
+                sh 'echo "saludos desde jenkins la mitad del pipelina terminal"'
+            }
         }
         stage {
-            echo 'Adios desde jenkins terminal'
+            steps {
+                echo 'Adios desde jenkins terminal'
+            }
         }
     }
 }
