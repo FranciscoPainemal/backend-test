@@ -45,7 +45,7 @@ pipeline {
                 sh 'docker tag backend-test wainerock/backend-test'
                 
                 script{
-                    docker.withRegistry("https://index.docker.io/v1", "id-credencial-jenkins"){
+                    docker.withRegistry("https://index.docker.io/v1/", "id-credencial-jenkins"){
                         sh 'docker push wainerock/backend-test'
                     }
                 }
