@@ -39,20 +39,7 @@ pipeline {
                 }
             }
         }
-        stage('Build docker image'){
-            steps {
-                sh 'docker build -t backend-test .'
-                
-                script{
-                    docker.withRegistry("https://index.docker.io/v1/", "id-credencial-jenkins"){
-                        sh 'docker push wainerock/backend-test'
-                        sh "docker push wainerock/backend-test:${env.BUILD_NUMBER}"
-                        sh 'docker tag backend-test wainerock/backend-test'
-                        sh "docker tag backend-test wainerock/backend-test:${env.BUILD_NUMBER}"
-                    }
-                }
-            }
-        }
+        
         stage('FIn PIpeline'){
             steps {
                 echo 'Adios desde jenkins terminal'
