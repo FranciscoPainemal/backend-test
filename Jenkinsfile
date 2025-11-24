@@ -51,10 +51,10 @@ pipeline {
                         sh "docker push wainerock/backend-test:${env.BUILD_NUMBER}"
                     }
                     docker.withRegistry("https://ghcr.io","credencial-github"){
-                        sh 'docker tag backend-test ghcr.io/FranciscoPainemal/backend-test'
-                        sh "docker tag backend-test ghcr.io/FranciscoPainemal/backend-test:${env.BUILD_NUMBER}"
-                        sh 'docker push ghcr.io/FranciscoPainemal/backend-test'
-                        sh "docker push ghcr.io/FranciscoPainemal/backend-test:${env.BUILD_NUMBER}"
+                        sh 'docker tag backend-test ghcr.io/franciscopainemal/backend-test'
+                        sh "docker tag backend-test ghcr.io/franciscopainemal/backend-test:${env.BUILD_NUMBER}"
+                        sh 'docker push ghcr.io/franciscopainemal/backend-test'
+                        sh "docker push ghcr.io/franciscopainemal/backend-test:${env.BUILD_NUMBER}"
                     }
                 }
             }
