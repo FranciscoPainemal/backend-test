@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fpainemal
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-test-cm
+  namespace: fpainemal
+data: 
+  USERNAME: "cmd"
+  ENDPOINT: "http://api.google.com/v1"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backend-test-sc
+  namespace: fpainemal
+type: Opaque
+stringData:
+  APIKEY: "123456789abc"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-test-dp
+  namespace: fpainemal
+  labels:
+    app: mi-app-backend-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend-test
+  template:
+    metadata:
+      labels:
+        app: backend-test
+    spec:
+      containers:
+      - name: backend
+        image: wainerock/backend-test
+        imagePullPolicy: Always
+        env:
+        - name: NODE_ENV
+          value: development
+        - name: PORT
+          value: "3000"
+        - name: USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: backend-test-cm
+              key: USERNAME
+              optional: true
+        - name: APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-test-sc
+              key: APIKEY
+              optional: true
+---
