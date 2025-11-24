@@ -51,6 +51,25 @@ pipeline {
                         sh "docker push wainerock/backend-test:${env.BUILD_NUMBER}"
                     }
                 }
+                docker.withRegistry("https://ghcr.io","credencial-github"){
+                        sh 'docker tag backend-test ghcr.io/FranciscoPainemal/backend-test'
+                        sh "docker tag backend-test ghcr.io/FranciscoPainemal/backend-test:${env.BUILD_NUMBER}"
+                        sh 'docker push ghcr.io/FranciscoPainemal/backend-test'
+                        sh "docker push ghcr.io/FranciscoPainemal/backend-test:${env.BUILD_NUMBER}"
+                }
+            }
+        }
+        stage('Despliegue continuo'){
+            agent{
+                docker{
+                    image 'alpine/k8s:1.32.2'
+                    reuseNode true
+                }
+            }
+            steps{
+                withKubeConfig([credentialsId: 'kubeconfig-docker']){
+                    sh "kubectl -n backend-test set image deployments backend-dp bakcend=localhost:8082/backend-test-devops:#{BUILD_NUMBER}"
+                }
             }
         }
         stage('FIn PIpeline'){
