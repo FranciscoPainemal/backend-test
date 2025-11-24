@@ -42,13 +42,13 @@ pipeline {
         stage('Build docker image'){
             steps {
                 sh 'docker build -t backend-test .'
-                sh 'docker tag backend-test wainerock/backend-test'
-                sh "docker tag backend-test wainerock/backend-test:${env.BUILD_NUMBER}"
                 
                 script{
                     docker.withRegistry("https://index.docker.io/v1/", "id-credencial-jenkins"){
                         sh 'docker push wainerock/backend-test'
                         sh "docker push wainerock/backend-test:${env.BUILD_NUMBER}"
+                        sh 'docker tag backend-test wainerock/backend-test'
+                        sh "docker tag backend-test wainerock/backend-test:${env.BUILD_NUMBER}"
                     }
                 }
             }
